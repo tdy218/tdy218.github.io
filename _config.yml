@@ -10,6 +10,8 @@ avatar_url: /static/img/avatar.png
 enableTags: true
 tagarray: []
 
+share:
+  - enabled: false
 social:
     - icon: fa-twitter
       link: "https://twitter.com/tdy218"
