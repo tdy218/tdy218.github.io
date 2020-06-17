@@ -1,0 +1,40 @@
+title: tdy218's blog
+description: My Personal Blog Site
+author: Chris Tian
+github: https://github.com/tdy218
+about: Doing more about cloud native middleware in Hangzhou, China
+disqus_shortname: tdy218.blog
+avatar_url: /static/img/avatar.png
+#google_analytics: UA-XXXXXXXX-Y
+
+enableTags: true
+tagarray: []
+
+social:
+    - icon: fa-twitter
+      link: "https://twitter.com/tdy218"
+    - icon: fa-github
+      link: "https://github.com/tdy218"
+
+urls:
+    - text: Contact Me
+      url: /contact/
+    - text: XML Feed
+      url: /feed.xml
+
+url: "https://tdy218.github.io"
+baseurl: ""
+paginate: 20
+per_page: 20
+paginate_path: "/page/:num/"
+markdown: kramdown
+plugins:
+  - jekyll-paginate
+  - jekyll-gist
+
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all
+  ignore:
+    envs: ['development']
