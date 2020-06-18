@@ -10,13 +10,14 @@ enableTags: true
 tagarray: ['other']
 
 share:
-  - enabled: false
+    - enabled: false
 
 social:
     - icon: fa-twitter
       link: "https://twitter.com/tdy218"
     - icon: fa-github
       link: "https://github.com/tdy218"
+
 urls:
     - text: Contact Me
       url: /contact/
@@ -31,8 +32,8 @@ paginate_path: "/page/:num/"
 markdown: kramdown
 
 plugins:
-  - jekyll-paginate
-  - jekyll-gist
+    - jekyll-paginate
+    - jekyll-gist
 
 compress_html:
   clippings: all
