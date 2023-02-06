@@ -19,6 +19,8 @@ social:
       link: "https://github.com/tdy218"
 
 urls:
+    - text: Categories
+      url: /categories/
     - text: Contact Me
       url: /contact/
     - text: XML Feed
