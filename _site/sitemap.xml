@@ -5,9 +5,61 @@
     <description>My Personal Blog Site</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 06 Feb 2023 11:04:31 +0800</pubDate>
-    <lastBuildDate>Mon, 06 Feb 2023 11:04:31 +0800</lastBuildDate>
+    <pubDate>Mon, 06 Feb 2023 14:38:22 +0800</pubDate>
+    <lastBuildDate>Mon, 06 Feb 2023 14:38:22 +0800</lastBuildDate>
     <generator>Jekyll v3.9.3</generator>
+    
+      <item>
+        <title>colima信任不安全的docker镜像仓库</title>
+        <description>&lt;h2 id=&quot;1-背景&quot;&gt;1. 背景&lt;/h2&gt;
+
+&lt;p&gt;Docker Desktop 开始收费以来，&lt;a href=&quot;https://github.com/abiosoft/colima&quot;&gt;Colima&lt;/a&gt; 就成为了它的一个不错的替代方案, colima 安装简单, 而且使用 docker client 作为 Docker 运行时以后, 与之前安装 Docker Desktop 之后, 在命令行下使用几乎无差.&lt;/p&gt;
+
+&lt;p&gt;macOS 系统下只需要下面几条命令即可完成替代:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;docker  &lt;span class=&quot;c&quot;&gt;# 使用 docker client 作为 docker 运行时, 还可以使用 containerd 作 为docker 运行时.&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;colima
+colima start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;结合 macOS 系统用户的使用习惯（下班后直接合上笔记本就走）, colima 在后台稳定运行, 几乎感受不到它的存在.&lt;/p&gt;
+
+&lt;p&gt;使用 colima 一段儿时间之后, 可能需要从本地登录一些不安全 Docker 镜像仓库站点（使用非权威 CA 颁发的 SSL 证书）, 但由于本地已经没有了 docker server 的守护进程, 所以不能修改 docker 守护进程的配置文件 /etc/docker/daemon.json 来添加不安全的 Docker 镜像仓库站点.&lt;/p&gt;
+
+&lt;p&gt;经过搜索 colima 相关文档, 找到下面的修改方法.&lt;/p&gt;
+
+&lt;h2 id=&quot;2修改-colima-配置文件添加不安全的-docker-镜像仓库站点&quot;&gt;2.修改 colima 配置文件添加不安全的 docker 镜像仓库站点&lt;/h2&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vi ~/.colima/default/colima.yaml
+
+docker:
+  insecure-registries:
+    - harbor.poc.cnstack.cloud:5000
+    - harbor.six.cnstack.cloud
+    ......
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;修改完成后，重启 colima 后端的虚拟机即可:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;colima stop
+colima start
+docker login harbor.six.cnstack.cloud
+
+Username: harbor
+Password:
+WARNING! Your password will be stored unencrypted &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /Users/tdy218/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Mon, 06 Feb 2023 14:03:03 +0800</pubDate>
+        <link>http://localhost:4000/docker/2023/02/06/colima%E4%BF%A1%E4%BB%BB%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93.html</link>
+        <guid isPermaLink="true">http://localhost:4000/docker/2023/02/06/colima%E4%BF%A1%E4%BB%BB%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93.html</guid>
+        
+        
+        <category>docker</category>
+        
+      </item>
     
       <item>
         <title>新博客新开始</title>

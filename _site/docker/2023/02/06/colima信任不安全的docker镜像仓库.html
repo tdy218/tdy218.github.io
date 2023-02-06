@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/static/img/favicon.ico" />
-    <title>新博客新开始 - tdy218's blog</title>
+    <title>colima信任不安全的docker镜像仓库 - tdy218's blog</title>
     <meta name="author" content="Chris Tian" />
-    <meta name="description" content="新博客新开始" />
-    <meta name="keywords" content="新博客新开始, tdy218's blog, other" />
+    <meta name="description" content="colima信任不安全的docker镜像仓库" />
+    <meta name="keywords" content="colima信任不安全的docker镜像仓库, tdy218's blog, docker" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
     <meta content="" property="fb:app_id">
     <meta content="tdy218's blog" property="og:site_name">
@@ -16,7 +16,7 @@
     
 
     
-      <meta content="新博客新开始" property="og:title">
+      <meta content="colima信任不安全的docker镜像仓库" property="og:title">
       <meta content="article" property="og:type">
     
 
@@ -25,11 +25,11 @@
     
 
     
-      <meta content="http://localhost:4000/other/2017/11/27/%E6%96%B0%E5%8D%9A%E5%AE%A2%E6%96%B0%E5%BC%80%E5%A7%8B.html" property="og:url">
+      <meta content="http://localhost:4000/docker/2023/02/06/colima%E4%BF%A1%E4%BB%BB%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93.html" property="og:url">
     
 
     
-      <meta content="2017-11-27T13:49:10+08:00" property="article:published_time">
+      <meta content="2023-02-06T14:03:03+08:00" property="article:published_time">
       <meta content="http://localhost:4000/about/" property="article:author">
     
 
@@ -39,7 +39,7 @@
 
     
       
-        <meta content="other" property="article:section">
+        <meta content="docker" property="article:section">
       
     
 
@@ -52,11 +52,11 @@
     <meta name="twitter:creator" content="@">
 
     
-      <meta name="twitter:title" content="新博客新开始">
+      <meta name="twitter:title" content="colima信任不安全的docker镜像仓库">
     
 
     
-      <meta name="twitter:url" content="http://localhost:4000/other/2017/11/27/%E6%96%B0%E5%8D%9A%E5%AE%A2%E6%96%B0%E5%BC%80%E5%A7%8B.html">
+      <meta name="twitter:url" content="http://localhost:4000/docker/2023/02/06/colima%E4%BF%A1%E4%BB%BB%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93.html">
     
 
     
@@ -120,19 +120,57 @@
       </div>
       <div class="col-sm-8 col-offset-1 main-layout">
         <header class="post-header">
-  <h1 class="post-title">新博客新开始</h1>
+  <h1 class="post-title">colima信任不安全的docker镜像仓库</h1>
 </header>
 
-<span class="time">27 Nov 2017</span>
+<span class="time">06 Feb 2023</span>
 
   <span class="categories">
-    &raquo; <a href="/category/other">other</a>
+    &raquo; <a href="/category/docker">docker</a>
   </span>
 
 
 <div class="content">
-  <div class="post"><p>换博客空间服务商了，从付费的 Wordpress 空间转到了 Github Pages.<br />
-向 Beansoft 学习，每年能省下来的大几百块钱给女儿买玩具、零食，哈哈！</p>
+  <div class="post"><h2 id="1-背景">1. 背景</h2>
+
+<p>Docker Desktop 开始收费以来，<a href="https://github.com/abiosoft/colima">Colima</a> 就成为了它的一个不错的替代方案, colima 安装简单, 而且使用 docker client 作为 Docker 运行时以后, 与之前安装 Docker Desktop 之后, 在命令行下使用几乎无差.</p>
+
+<p>macOS 系统下只需要下面几条命令即可完成替代:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>docker  <span class="c"># 使用 docker client 作为 docker 运行时, 还可以使用 containerd 作 为docker 运行时.</span>
+brew <span class="nb">install </span>colima
+colima start
+</code></pre></div></div>
+
+<p>结合 macOS 系统用户的使用习惯（下班后直接合上笔记本就走）, colima 在后台稳定运行, 几乎感受不到它的存在.</p>
+
+<p>使用 colima 一段儿时间之后, 可能需要从本地登录一些不安全 Docker 镜像仓库站点（使用非权威 CA 颁发的 SSL 证书）, 但由于本地已经没有了 docker server 的守护进程, 所以不能修改 docker 守护进程的配置文件 /etc/docker/daemon.json 来添加不安全的 Docker 镜像仓库站点.</p>
+
+<p>经过搜索 colima 相关文档, 找到下面的修改方法.</p>
+
+<h2 id="2修改-colima-配置文件添加不安全的-docker-镜像仓库站点">2.修改 colima 配置文件添加不安全的 docker 镜像仓库站点</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ~/.colima/default/colima.yaml
+
+docker:
+  insecure-registries:
+    - harbor.poc.cnstack.cloud:5000
+    - harbor.six.cnstack.cloud
+    ......
+</code></pre></div></div>
+
+<p>修改完成后，重启 colima 后端的虚拟机即可:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>colima stop
+colima start
+docker login harbor.six.cnstack.cloud
+
+Username: harbor
+Password:
+WARNING! Your password will be stored unencrypted <span class="k">in</span> /Users/tdy218/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+</code></pre></div></div>
 </div>
 </div>
 
@@ -156,8 +194,8 @@
 
 <div class="PageNavigation">
   
+    <a class="prev" href="/other/2017/11/27/%E6%96%B0%E5%8D%9A%E5%AE%A2%E6%96%B0%E5%BC%80%E5%A7%8B.html">&laquo; 新博客新开始</a>
   
-    <a class="next" href="/docker/2023/02/06/colima%E4%BF%A1%E4%BB%BB%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93.html">colima信任不安全的docker镜像仓库 &raquo;</a>
   
 </div>
 
@@ -166,8 +204,8 @@
   <script type="text/javascript">
     /* <![CDATA[ */
     var disqus_shortname = "tdy218.blog";
-    var disqus_identifier = "http://localhost:4000_新博客新开始";
-    var disqus_title = "新博客新开始";
+    var disqus_identifier = "http://localhost:4000_colima信任不安全的docker镜像仓库";
+    var disqus_title = "colima信任不安全的docker镜像仓库";
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
