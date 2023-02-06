@@ -17,3 +17,27 @@ colima start
 
 ## 2.修改 colima 配置文件添加不安全的 docker 镜像仓库站点
 
+```shell
+vi ~/.colima/default/colima.yaml
+
+docker:
+  insecure-registries:
+    - harbor.poc.cnstack.cloud:5000
+    - harbor.six.cnstack.cloud
+    ......
+```
+
+修改完成后，重启 colima 后端的虚拟机即可:
+```shell
+colima stop
+colima start
+docker login harbor.six.cnstack.cloud
+
+Username: harbor
+Password:
+WARNING! Your password will be stored unencrypted in /Users/tdy218/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+```
