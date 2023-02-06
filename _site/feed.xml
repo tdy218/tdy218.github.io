@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tdy218&apos;s blog</title>
+    <description>My Personal Blog Site</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 06 Feb 2023 11:04:31 +0800</pubDate>
+    <lastBuildDate>Mon, 06 Feb 2023 11:04:31 +0800</lastBuildDate>
+    <generator>Jekyll v3.9.3</generator>
+    
+      <item>
+        <title>新博客新开始</title>
+        <description>&lt;p&gt;换博客空间服务商了，从付费的 Wordpress 空间转到了 Github Pages.&lt;br /&gt;
+向 Beansoft 学习，每年能省下来的大几百块钱给女儿买玩具、零食，哈哈！&lt;/p&gt;
+</description>
+        <pubDate>Mon, 27 Nov 2017 13:49:10 +0800</pubDate>
+        <link>http://localhost:4000/other/2017/11/27/%E6%96%B0%E5%8D%9A%E5%AE%A2%E6%96%B0%E5%BC%80%E5%A7%8B.html</link>
+        <guid isPermaLink="true">http://localhost:4000/other/2017/11/27/%E6%96%B0%E5%8D%9A%E5%AE%A2%E6%96%B0%E5%BC%80%E5%A7%8B.html</guid>
+        
+        
+        <category>other</category>
+        
+      </item>
+    
+  </channel>
+</rss>
