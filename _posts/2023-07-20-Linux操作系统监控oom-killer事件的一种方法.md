@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "新博客新开始"
+title:  "Linux操作系统监控oom-killer事件的一种方法"
 date:   2023-07-20 16:09:51 +0800
 comments: true
 categories: [linux]
